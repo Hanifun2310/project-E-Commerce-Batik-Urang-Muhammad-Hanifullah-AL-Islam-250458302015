@@ -8,45 +8,53 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Validate;
 
 #[Layout('components.layouts.app')]
 class Register extends Component
 {
-    // Definisikan SEMUA properti yang dibutuhkan oleh wire:model
-    public string $name = '';
-    public string $email = '';
-    public string $password = '';
-    public string $password_confirmation = '';
+    // Properti Formulir
+    #[Validate]
+    public $name = '';
+
+    #[Validate]
+    public $email = '';
+
+    #[Validate]
+    public $password = '';
+
+    // Tidak perlu validasi eksplisit di sini, karena aturan 'confirmed' di password otomatis mengecek ini
+    public $password_confirmation = '';
 
     /**
-     * Aturan validasi untuk input form.
+     * Aturan validasi
      */
-    protected function rules(): array
+    protected function rules()
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'confirmed', Password::defaults()],
         ];
     }
 
     /**
-     * Method yang dijalankan saat form di-submit (wire:submit="register").
+     * Proses Register
      */
     public function register()
     {
-        $validatedData = $this->validate();
+        $this->validate();
 
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
         ]);
 
+        // Login otomatis
         Auth::login($user);
 
-        return $this->redirect('/', navigate: true);
+        // Redirect ke halaman Profile
+        return $this->redirect(route('profile'), navigate: true);
     }
-
-    // Method render() tidak perlu
 }

@@ -4,58 +4,47 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Layout; 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Validate; // Menggunakan atribut validasi PHP 8
 
-#[Layout('components.layouts.app')] 
+#[Layout('components.layouts.app')]
 class Login extends Component
 {
-    // Properti untuk input email dan password
+    // Menggunakan atribut Validate langsung di properti (gaya Livewire 3 modern)
+    #[Validate('required|email')]
     public string $email = '';
-    public string $password = '';
-    // Properti untuk checkbox "Ingat Saya" (opsional)
-    public bool $remember = false;
 
-    /**
-     * Aturan validasi
-     */
-    protected function rules(): array
-    {
-        return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
-        ];
-    }
+    #[Validate('required')]
+    public string $password = '';
+
+    public bool $remember = false;
 
     /**
      * Method untuk memproses login
      */
     public function login()
     {
-        // Validasi input
-        $credentials = $this->validate();
+        // 1. Validasi input berdasarkan atribut #[Validate] di atas
+        $this->validate();
 
-        // Coba lakukan login menggunakan Auth::attempt
-        // Auth::attempt otomatis mengecek email dan HASH password
-        // Argumen kedua (true/false) adalah untuk 'remember me'
-        if (Auth::attempt($credentials, $this->remember)) {
-            // Jika berhasil, regenerate session & redirect ke homepage
-            request()->session()->regenerate();
+        // 2. Coba login menggunakan Auth facade
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+            
+            // 3. Regenerasi ID sesi untuk keamanan (mencegah session fixation)
+            session()->regenerate();
+
+            // 4. Redirect ke halaman utama ('/')
+            // navigate: true membuat transisi lebih cepat (SPA mode)
             return $this->redirect('/', navigate: true);
         }
 
-        // Jika login gagal (email/password salah)
-        // Tambahkan error ke field 'email' agar ditampilkan di view
+        // 5. Jika login gagal
+        // Kirim error ke field email
         $this->addError('email', 'Email atau password yang Anda masukkan salah.');
-        // Hapus password agar user harus mengetik ulang
+        
+        // Kosongkan password agar pengguna mengetik ulang
         $this->reset('password');
     }
 
-    /**
-     * Render view (Livewire otomatis mencari livewire.auth.login)
-     */
-     // Method render() tidak perlu ditulis jika pakai Layout attribute
-     // public function render()
-     // {
-     //     return view('livewire.auth.login');
-     // }
+    // Tidak perlu method render() jika menggunakan atribut #[Layout] dan nama file view sesuai konvensi
 }
