@@ -16,13 +16,13 @@ class OrderList extends Component
     use WithPagination;
     use WithFileUploads; 
 
-    // [TAMBAH] Properti untuk file (menampung file sementara)
+    //  untuk file (menampung file sementara)
     public $paymentProofFile;
 
-    // [TAMBAH] Properti untuk melacak pesanan mana yg sedang di-upload
+    // untuk melacak pesanan mana yg sedang di-upload
     public $uploadingOrderId = null;
 
-    // [TAMBAH] Properti untuk pesan sukses upload
+    //  untuk pesan sukses upload
     public $successMessage = '';
 
     /**
@@ -36,7 +36,7 @@ class OrderList extends Component
     }
 
     /**
-     * [TAMBAH] Method untuk menyimpan file bukti bayar
+     * Method untuk menyimpan file bukti bayar
      */
     public function savePaymentProof()
     {

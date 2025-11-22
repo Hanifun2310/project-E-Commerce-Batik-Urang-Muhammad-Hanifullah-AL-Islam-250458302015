@@ -4,7 +4,6 @@ use App\Livewire\User\OrderList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth; // <-- PENTING: Import Auth untuk Logout
 use App\Livewire\Auth\Register;
-use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\ProductList;
 use App\Livewire\ProductShow; 
@@ -44,7 +43,6 @@ Route::get('/', function () {
 
 // Rute Register & Login
 Route::get('/register', Register::class)->name('register');
-Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
 Route::get('/login', Login::class)->name('login');
 
 // Rute Logout (Perbaikan Error)
