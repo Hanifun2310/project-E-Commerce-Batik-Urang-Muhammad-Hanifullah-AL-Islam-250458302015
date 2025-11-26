@@ -43,7 +43,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="{{ route('admin.dashboard') }}"><img src="{{ asset('images/logo.png') }}" class="" alt="Logo" srcset="">Batik Urang</a>
+                            <a href="{{ route('admin.dashboard') }}">Batik Urang</a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
