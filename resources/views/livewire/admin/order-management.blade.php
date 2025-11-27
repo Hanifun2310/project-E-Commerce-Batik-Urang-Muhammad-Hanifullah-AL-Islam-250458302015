@@ -62,7 +62,7 @@
                                     <span class="badge bg-{{ $statusClass }}">{{ $statusLabel }}</span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-info" wire:click="showDetailModal({{ $order->id }})">Detail</button>
+                                    <button class="btn btn-sm btn-info" wire:click="showDetailModal('{{ $order->id }}')">Detail</button>
                                 </td>
                             </tr>
                             @empty

@@ -35,10 +35,10 @@
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->created_at->format('d M Y') }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning" wire:click="showModal({{ $category->id }})">Edit</button>
+                                        <button class="btn btn-sm btn-warning" wire:click="showModal('{{ $category->id }}')">Edit</button>
                                         
                                         <button class="btn btn-sm btn-danger" 
-                                                wire:click="confirmDelete({{ $category->id }})"> Hapus
+                                                wire:click="confirmDelete('{{ $category->id }}')"> Hapus
                                         </button>
                                     </td>
                                 </tr>

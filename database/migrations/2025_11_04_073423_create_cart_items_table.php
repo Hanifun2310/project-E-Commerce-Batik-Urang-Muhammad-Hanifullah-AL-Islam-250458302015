@@ -15,7 +15,7 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('cart_items', function (Blueprint $table) {
-        $table->id(); 
+        $table->uuid('id')->primary(); // ID menggunakan UUID
 
 
         $table->foreignId('user_id')->constrained('users')->onDelete('cascade');

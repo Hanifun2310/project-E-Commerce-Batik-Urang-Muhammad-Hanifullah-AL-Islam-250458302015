@@ -70,7 +70,7 @@ class OrderManagement extends Component
     public function showDetailModal($orderId)
     {
         // Ambil relasi yang diperlukan untuk detail
-        $this->selectedOrder = Order::with(['user', 'Items.product'])->findOrFail($orderId);
+        $this->selectedOrder = Order::with(['user', 'items.product'])->findOrFail($orderId);
         $this->newStatus = $this->selectedOrder->status; // Set status saat ini
         $this->isDetailModalOpen = true;
     }

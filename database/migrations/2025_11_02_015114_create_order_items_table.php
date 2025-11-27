@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
     Schema::create('order_items', function (Blueprint $table) {
-        $table->id(); // ID item pesanan
+        $table->uuid('id')->primary(); // ID item pesanan menggunakan UUID
 
-        // Menghubungkan ke tabel 
-        $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+        // Menghubungkan ke tabel orders (UUID)
+        $table->uuid('order_id');
+        $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
         // Menghubungkan ke tabel 'products' (UUID)
         // Kita pakai nullable() dan nullOnDelete() agar jika produk dihapus, data pesanan tetap ada

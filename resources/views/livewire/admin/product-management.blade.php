@@ -48,9 +48,9 @@
                                     <td>{{ $product->stock_quantity }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-warning mb-auto " 
-                                                wire:click="showEditModal({{ $product->id }})">Edit</button>
+                                                wire:click="showEditModal('{{ $product->id }}')">Edit</button>
                                         <button class="btn btn-sm btn-danger" 
-                                                wire:click="confirmDelete({{ $product->id }})" > Hapus
+                                                wire:click="confirmDelete('{{ $product->id }}')" > Hapus
                                         </button>
                                     </td>
                                 </tr>
