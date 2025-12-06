@@ -33,7 +33,8 @@ Batik Livewire adalah aplikasi e-commerce yang dirancang khusus untuk memudahkan
 
 ## Teknologi yang Digunakan
 
--   **Laravel Herd 12** - PHP development environment
+-   **Laravel 12** - PHP Framework
+-   **Laravel Herd** - PHP development environment
 -   **Livewire 3.6** - Full-stack framework untuk komponen interaktif
 -   **Tailwind CSS (CDN)** - Utility-first CSS framework
 -   **SweetAlert2** - Beautiful, responsive alerts
@@ -54,36 +55,29 @@ Pastikan sistem telah terinstall:
 
 ### Langkah Instalasi
 
-1. **Clone Repository**
-
-    ```bash
-    git clone <repository-url>
-    cd batik_livewire
-    ```
-
-2. **Install Dependencies PHP**
+1. **Install Dependencies PHP**
 
     ```bash
     composer install
     ```
 
-3. **Install Dependencies JavaScript**
+2. **Install Dependencies JavaScript**
 
     ```bash
     npm install
     ```
 
-4. **Konfigurasi Environment**
-
-    ```bash
-    # Copy file .env.example menjadi .env
-    cp .env.example .env
+3. **Konfigurasi Environment**
 
     # Generate application key
+
     php artisan key:generate
+
     ```
 
-5. **Konfigurasi Database**
+    ```
+
+4. **Konfigurasi Database**
 
     Edit file `.env` dan sesuaikan konfigurasi database:
 
@@ -96,25 +90,25 @@ Pastikan sistem telah terinstall:
     DB_PASSWORD=
     ```
 
-6. **Jalankan Migrasi Database**
+5. **Jalankan Migrasi Database**
 
     ```bash
     php artisan migrate
     ```
 
-7. **Seed Database (Opsional)**
+6. **Seed Database (Opsional)**
 
     ```bash
     php artisan db:seed
     ```
 
-8. **Buat Storage Link**
+7. **Buat Storage Link**
 
     ```bash
     php artisan storage:link
     ```
 
-9. **Build Assets**
+8. **Build Assets**
     ```bash
     npm run build
     ```
